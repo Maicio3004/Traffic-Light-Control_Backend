@@ -4,6 +4,7 @@ import co.edu.uis.traffic.dtos.response.google.maps.DistanceMatrix;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
@@ -17,10 +18,15 @@ public class GoogleAPIClient {
 
     private final RestTemplate restTemplate;
 
-    public DistanceMatrix verifyCongestion(String origin, String destination) {
-        final String URL = String.format(BASE_URL, origin, destination, API_KEY);
+    public DistanceMatrix verifyCongestion(String origin, String finish) {
+        final String URL = String.format(BASE_URL, origin, finish, API_KEY);
 
-        return restTemplate.getForObject(URL, DistanceMatrix.class);
+        try {
+            return restTemplate.getForObject(URL, DistanceMatrix.class);
+        } catch (RestClientException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return null;
     }
 
 }

@@ -11,7 +11,7 @@ public class ScheduleRequest {
 
     private List<DayOfWeek> dayOfWeeks;
     private LocalTime startTime;
-    private LocalTime endTime;
+    private LocalTime endTime; //"08:00"
     private Integer modeId;
 
 }

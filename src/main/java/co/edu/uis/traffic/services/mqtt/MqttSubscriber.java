@@ -26,7 +26,7 @@ public class MqttSubscriber {
         if(payload instanceof String json) {
             try {
                 request = mapper.readValue(json, ActivationRequest.class);
-                sseService.sendEvent("transaction-event", request);
+                sseService.sendEvent("semaforo-color", request);
             } catch (JsonProcessingException e) {
                 System.out.println(e.getMessage());
             }

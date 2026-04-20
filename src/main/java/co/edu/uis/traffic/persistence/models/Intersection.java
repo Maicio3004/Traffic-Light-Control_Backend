@@ -27,6 +27,9 @@ public class Intersection {
     @Column(nullable = false, name = "code")
     private String code;
 
+    @Column(nullable = false)
+    private Integer position;
+
     @Embedded
     private Coordinate coordinate;
 
