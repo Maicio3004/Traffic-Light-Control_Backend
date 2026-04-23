@@ -1,7 +1,7 @@
 package co.edu.uis.traffic.services;
 
-import co.edu.uis.traffic.dtos.response.IntersectionCongestionEvent;
-import co.edu.uis.traffic.dtos.response.RouteCongestionEvent;
+import co.edu.uis.traffic.dtos.response.events.IntersectionCongestionEvent;
+import co.edu.uis.traffic.dtos.response.events.RouteCongestionEvent;
 import co.edu.uis.traffic.dtos.response.google.maps.DistanceMatrix;
 import co.edu.uis.traffic.persistence.models.Intersection;
 import co.edu.uis.traffic.persistence.models.Route;
@@ -78,9 +78,9 @@ public class TrafficService {
                     segment.getSecond()
             );
 
-            float congestion = response.getCongestion();
+            double congestion = response.getCongestion();
 
-            log.info("Congestion: {}", congestion);
+            log.info("Congestion: {}, Intersection: {}", congestion, intersections.get(i).getCode());
 
             //Enviamos el nivel de congestion de la intersección
             sseService.sendEvent(
@@ -142,7 +142,7 @@ public class TrafficService {
             finish =  route.getIntersections().getLast().getCoordinate().toString();
         }
 
-        float congestion = googleAPIClient.verifyCongestion(origin, finish).getCongestion();
+        double congestion = googleAPIClient.verifyCongestion(origin, finish).getCongestion();
 
         log.info("Congestion global en la 27: {}", congestion);
 

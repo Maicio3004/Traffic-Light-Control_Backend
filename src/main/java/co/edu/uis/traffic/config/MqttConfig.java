@@ -28,8 +28,11 @@ public class MqttConfig {
     @Value("${mqtt.password}")
     private String password;
 
-    @Value("${mqtt.topics.inbound-topic}")
-    private String inboundTopic;
+    @Value("${mqtt.topics.inbound-color-topic}")
+    private String inboundColorTopic;
+
+    @Value("${mqtt.topics.inbound-status-topic}")
+    private String inboundStatusTopic;
 
     /**
      * Creamos el Factory para crear canales de entrada y salida
@@ -55,7 +58,11 @@ public class MqttConfig {
     @Bean
     public MqttPahoMessageDrivenChannelAdapter inboundAdapter(MqttPahoClientFactory factory, MessageChannel inboundChannel) {
         MqttPahoMessageDrivenChannelAdapter adapter =
-                new MqttPahoMessageDrivenChannelAdapter(clientId + "_in", factory, inboundTopic);
+                new MqttPahoMessageDrivenChannelAdapter(
+                        clientId + "_in",
+                        factory,
+                        inboundColorTopic, inboundStatusTopic
+                );
 
         adapter.setOutputChannel(inboundChannel);
         return adapter;

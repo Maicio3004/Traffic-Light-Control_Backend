@@ -1,10 +1,10 @@
-package co.edu.uis.traffic.dtos.response;
+package co.edu.uis.traffic.dtos.response.events;
 
 public record IntersectionCongestionEvent(
         String codeIntersection,
-        Float congestionLevel
+        Double congestionLevel
 ) {
-    public static IntersectionCongestionEvent create(String codeIntersection, Float congestionLevel) {
+    public static IntersectionCongestionEvent create(String codeIntersection, Double congestionLevel) {
         return new IntersectionCongestionEvent(
                 codeIntersection,
                 congestionLevel

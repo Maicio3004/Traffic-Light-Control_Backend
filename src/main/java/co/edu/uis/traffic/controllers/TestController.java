@@ -1,6 +1,8 @@
 package co.edu.uis.traffic.controllers;
 
 import co.edu.uis.traffic.dtos.request.ActivationRequest;
+import co.edu.uis.traffic.dtos.response.events.StatusIntersectionEvent;
+import co.edu.uis.traffic.services.ScheduleService;
 import co.edu.uis.traffic.services.TrafficService;
 import co.edu.uis.traffic.services.mqtt.MqttPublish;
 import lombok.RequiredArgsConstructor;
@@ -15,16 +17,23 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     private final TrafficService trafficService;
+    private final ScheduleService scheduleService;
     private final MqttPublish mqttPublisher;
 
     @GetMapping("/get/traffic")
     public ResponseEntity<?> getTraffic() {
-        trafficService.verifyCongestion();
+        scheduleService.scheduler();
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/test/color")
     public ResponseEntity<String> testESP32(@RequestBody ActivationRequest request) {
+        mqttPublisher.test(request);
+        return ResponseEntity.ok("Mensaje enviado");
+    }
+
+    @PostMapping("/test/status")
+    public ResponseEntity<String> testStatusESP32(@RequestBody StatusIntersectionEvent request) {
         mqttPublisher.test(request);
         return ResponseEntity.ok("Mensaje enviado");
     }

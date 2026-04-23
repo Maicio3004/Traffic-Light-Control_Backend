@@ -4,7 +4,6 @@ import co.edu.uis.traffic.dtos.request.OperationRequest;
 import co.edu.uis.traffic.dtos.request.ScheduleRequest;
 import co.edu.uis.traffic.dtos.response.ScheduleResponse;
 import co.edu.uis.traffic.persistence.models.OperationMode;
-import co.edu.uis.traffic.persistence.models.Schedule;
 import co.edu.uis.traffic.services.OperationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

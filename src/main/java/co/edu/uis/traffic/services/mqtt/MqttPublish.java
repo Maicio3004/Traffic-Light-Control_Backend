@@ -2,6 +2,7 @@ package co.edu.uis.traffic.services.mqtt;
 
 import co.edu.uis.traffic.dtos.request.ActivationRequest;
 import co.edu.uis.traffic.dtos.response.ActivationResponse;
+import co.edu.uis.traffic.dtos.response.events.StatusIntersectionEvent;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ public class MqttPublish {
     private final MessageChannel outboundChannel;
     private final ObjectMapper objectMapper;
 
-    @Value("${mqtt.topics.activate-topic}")
+    @Value("${mqtt.topics.outbound-activate-topic}")
     private String BASE_ACTIVATE_TOPIC;
 
     public void activateIntersection(ActivationResponse response) {
@@ -41,7 +42,20 @@ public class MqttPublish {
     public void test(ActivationRequest request) {
 
         String json = writeValueAsString(request);
-        String topic = "traffic/active";
+        String topic = "intersection/status";
+
+        Message<String> message = MessageBuilder
+                .withPayload(json)
+                .setHeader(MqttHeaders.TOPIC, topic)
+                .build();
+
+        outboundChannel.send(message);
+    }
+
+    public void test(StatusIntersectionEvent request) {
+
+        String json = writeValueAsString(request);
+        String topic = "intersection/status";
 
         Message<String> message = MessageBuilder
                 .withPayload(json)

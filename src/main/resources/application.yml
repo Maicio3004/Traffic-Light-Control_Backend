@@ -25,8 +25,9 @@ mqtt:
   username: ${MQTT_USERNAME}
   password: ${MQTT_PASSWORD}
   topics:
-    inbound-topic: ${INBOUND_TOPIC}
-    activate-topic: ${ACTIVATE_TOPIC}
+    inbound-color-topic: ${INBOUND_COLOR_TOPIC}
+    inbound-status-topic: ${INBOUND_STATUS_TOPIC}
+    outbound-activate-topic: ${OUTBOUND_ACTIVATE_TOPIC}
 
 google:
   apis:

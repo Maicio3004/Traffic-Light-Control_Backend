@@ -9,10 +9,12 @@ public class DistanceMatrix {
 
     private List<Row> rows;
 
-    public float getCongestion() {
+    public double getCongestion() {
         float duration = rows.getFirst().getElements().getFirst().getDuration().getValue();
-        float durationInTraffic = rows.getLast().getElements().getLast().getDuration().getValue();
+        float durationInTraffic = rows.getLast().getElements().getFirst().getDuration_in_traffic().getValue();
 
-        return (durationInTraffic / duration);
+        return (double) (durationInTraffic / duration);
     }
+
+
 }
