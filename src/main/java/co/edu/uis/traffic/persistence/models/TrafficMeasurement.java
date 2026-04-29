@@ -17,12 +17,14 @@ public class TrafficMeasurement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "average_time")
-    private Integer averageTime;
-    @Column(name = "current_time_app")
-    private Integer currentTime;
+    @Column(name = "duration")
+    private Integer duration;
+
+    @Column(name = "duration_in_traffic")
+    private Integer durationInTraffic;
+
     @Column(name = "congestion_level")
-    private Float congestionLevel;
+    private Double congestionLevel;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

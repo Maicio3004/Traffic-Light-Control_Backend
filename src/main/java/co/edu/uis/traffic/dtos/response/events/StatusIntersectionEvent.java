@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class StatusIntersectionEvent{
+public class StatusIntersectionEvent{ //[{codeIntersection: "INT-2-1"}, {codeIntersection: "INT-2-2"}]
     private String status;
     private String codeIntersection;
 }

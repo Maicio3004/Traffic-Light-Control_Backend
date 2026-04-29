@@ -5,8 +5,10 @@ import co.edu.uis.traffic.dtos.response.events.RouteCongestionEvent;
 import co.edu.uis.traffic.dtos.response.google.maps.DistanceMatrix;
 import co.edu.uis.traffic.persistence.models.Intersection;
 import co.edu.uis.traffic.persistence.models.Route;
+import co.edu.uis.traffic.persistence.models.TrafficMeasurement;
 import co.edu.uis.traffic.persistence.repositories.IntersectionRepository;
 import co.edu.uis.traffic.persistence.repositories.RouteRepository;
+import co.edu.uis.traffic.persistence.repositories.TrafficMeasurementRepository;
 import co.edu.uis.traffic.services.clients.GoogleAPIClient;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -41,6 +43,7 @@ public class TrafficService {
     private final GoogleAPIClient googleAPIClient;
     private final TransactionService transactionService;
     private final SseService sseService;
+    private final TrafficMeasurementRepository trafficMeasurementRepository;
 
     /**
      * <p>
@@ -77,6 +80,9 @@ public class TrafficService {
                     segment.getFirst(),
                     segment.getSecond()
             );
+
+            //Guardamos la respuesta en la base de datos
+            saveResponse(response, intersections, i);
 
             double congestion = response.getCongestion();
 
@@ -146,7 +152,7 @@ public class TrafficService {
 
         log.info("Congestion global en la 27: {}", congestion);
 
-        //Enviamos la congestión global de la ruta
+        //Enviamos la congestión global de la ruta 1.0
         sseService.sendEvent(
                 ROUTE_CONGESTION,
                 RouteCongestionEvent.create(congestion, route.getId())
@@ -157,6 +163,19 @@ public class TrafficService {
         for (int i = iterator; i < intersections.size(); i++) {
             transactionService.create(intersections.get(i));
         }
+    }
+
+    public TrafficMeasurement saveResponse(DistanceMatrix response, List<Intersection> intersections, int index) {
+
+        TrafficMeasurement traffic = new TrafficMeasurement();
+        traffic.setDuration(response.duration());
+        traffic.setDurationInTraffic(response.durationInTraffic());
+        traffic.setCongestionLevel(response.getCongestion());
+        traffic.setCreatedAt(response.getTimestamp());
+        traffic.setCodeResponse(response.getStatus());
+        traffic.setIntersection(intersections.get(index));
+
+        return trafficMeasurementRepository.save(traffic);
     }
 
 }
