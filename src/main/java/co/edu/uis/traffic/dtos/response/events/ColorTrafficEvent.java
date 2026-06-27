@@ -7,4 +7,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ColorTrafficEvent {
     private String color;
+    private String codeIntersection;
 }
