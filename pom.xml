@@ -12,7 +12,10 @@
 	<artifactId>traffic-light-uis</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Traffic</name>
-	<description>Este proyecto contiene el código backend para la implementación del sistema de semaforización para la optimización del tráfico vehicular en Bucaramanga sobre la Cra 27</description>
+	<description>
+        Este proyecto contiene el código backend para la implementación del sistema de semaforización
+        para la optimización del tráfico vehicular en Bucaramanga sobre la Cra
+    </description>
 	<url/>
 	<licenses>
 		<license/>
