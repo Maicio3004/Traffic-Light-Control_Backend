@@ -4,14 +4,21 @@ import jakarta.persistence.Embeddable;
 import lombok.Getter;
 
 @Embeddable
+@Getter
 public class Coordinate {
 
     private Float latitude;
     private Float longitude;
 
-    @Override
-    public String toString(){
-        return latitude + ", " + longitude;
+    public Coordinate() {}
+
+    public Coordinate(Float latitude, Float longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
+    @Override
+    public String toString() {
+        return latitude + ", " + longitude;
+    }
 }

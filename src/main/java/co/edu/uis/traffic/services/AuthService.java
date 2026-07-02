@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthService {
 
-    private final UserRepository userRepository;
+    private final UserRepository repository;
 
     public User login(LoginRequest request) {
-        return userRepository.findByUsernameAndPassword(
-                request.getUsername(), request.getPassword()
-        ).orElseThrow(() -> new EntityNotFound("User not found"));
+       return repository.findByEmailAndPassword(
+               request.getEmail(), request.getPassword()
+       ).orElseThrow(()-> new EntityNotFound("User not found") );
     }
 
 }

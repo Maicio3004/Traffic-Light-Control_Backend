@@ -62,5 +62,14 @@ public class OperationService implements CrudService<OperationMode> {
 
         return ScheduleResponse.createResponse(scheduleRepository.save(schedule));
     }
+    public List<ScheduleResponse> findAllSchedules() {
+        return scheduleRepository.findAll()
+                .stream()
+                .map(ScheduleResponse::createResponse)
+                .toList();
+    }
+    public void deleteSchedule(Integer id) {
+        scheduleRepository.deleteById(id);
+    }
 
 }

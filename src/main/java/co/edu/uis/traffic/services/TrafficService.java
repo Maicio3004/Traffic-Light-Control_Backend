@@ -10,6 +10,8 @@ import co.edu.uis.traffic.persistence.repositories.IntersectionRepository;
 import co.edu.uis.traffic.persistence.repositories.RouteRepository;
 import co.edu.uis.traffic.persistence.repositories.TrafficMeasurementRepository;
 import co.edu.uis.traffic.services.clients.GoogleAPIClient;
+import co.edu.uis.traffic.dtos.response.IntersectionResponse;
+import co.edu.uis.traffic.dtos.response.MeasurementResponse;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -176,6 +178,18 @@ public class TrafficService {
         traffic.setIntersection(intersections.get(index));
 
         return trafficMeasurementRepository.save(traffic);
+    }
+    public List<IntersectionResponse> getAllIntersections() {
+        return intersectionRepository.findAll()
+                .stream()
+                .map(IntersectionResponse::fromEntity)
+                .toList();
+    }
+    public List<MeasurementResponse> findAllMeasurements() {
+        return trafficMeasurementRepository.findAll()
+                .stream()
+                .map(MeasurementResponse::toResponse)
+                .toList();
     }
 
 }

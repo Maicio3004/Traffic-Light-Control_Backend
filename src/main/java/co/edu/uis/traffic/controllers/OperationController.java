@@ -34,5 +34,14 @@ public class OperationController {
     public ResponseEntity<ScheduleResponse> createSchedule(@RequestBody ScheduleRequest request) {
         return ResponseEntity.created(URI.create("/config/schedule")).body(operationService.createSchedule(request));
     }
+    @GetMapping("/schedule/get")
+    public ResponseEntity<List<ScheduleResponse>> getAllSchedules() {
+        return ResponseEntity.ok(operationService.findAllSchedules());
+    }
+    @DeleteMapping("/schedule/{id}")
+    public ResponseEntity<Void> deleteSchedule(@PathVariable Integer id) {
+        operationService.deleteSchedule(id);
+        return ResponseEntity.ok().build();
+    }
 
 }
