@@ -65,7 +65,6 @@ public class TrafficService {
 
     private void processRoute(Route route, boolean isBeforeNoon) {
 
-        boolean congestionHandled = false;
         Sort sort = isBeforeNoon
                 ? Sort.by(Sort.Direction.ASC, "position")
                 : Sort.by(Sort.Direction.DESC, "position");
@@ -96,9 +95,9 @@ public class TrafficService {
                     IntersectionCongestionEvent.create(intersections.get(i).getCode(), congestion)
             );
 
-            if(congestion > CONGESTION_THRESHOLD && !congestionHandled) {
+            if(congestion > CONGESTION_THRESHOLD) {
                 reduceCongestion(intersections, i);
-                congestionHandled = true;
+                i = intersections.size();
             }
 
         }
@@ -167,7 +166,7 @@ public class TrafficService {
         }
     }
 
-    public TrafficMeasurement saveResponse(DistanceMatrix response, List<Intersection> intersections, int index) {
+    public void saveResponse(DistanceMatrix response, List<Intersection> intersections, int index) {
 
         TrafficMeasurement traffic = new TrafficMeasurement();
         traffic.setDuration(response.duration());
@@ -177,7 +176,7 @@ public class TrafficService {
         traffic.setCodeResponse(response.getStatus());
         traffic.setIntersection(intersections.get(index));
 
-        return trafficMeasurementRepository.save(traffic);
+        trafficMeasurementRepository.save(traffic);
     }
     public List<IntersectionResponse> getAllIntersections() {
         return intersectionRepository.findAll()
