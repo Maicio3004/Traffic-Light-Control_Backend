@@ -1,4 +1,4 @@
-package co.edu.uis.traffic.config;
+/*package co.edu.uis.traffic.config;
 
 import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
@@ -79,4 +79,4 @@ public class DatabaseConfig {
             logger.error("Error al actualizar el registro: {}", e.getMessage());
         }
     }
-}
+}*/
