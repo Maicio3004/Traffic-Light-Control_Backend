@@ -1,6 +1,14 @@
 CREATE TABLE IF NOT EXISTS schema_version (id BIGINT AUTO_INCREMENT PRIMARY KEY, type VARCHAR(100) NOT NULL, version VARCHAR(50), description VARCHAR(255), executed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
 -- ======================================
+-- Modos de operacion
+-- ======================================
+
+INSERT INTO operation_mode (id, description, mode_operation) VALUES (1, 'Modo apagado', 'OFF');
+INSERT INTO operation_mode (id, description, mode_operation) VALUES (2, 'Modo normal', 'NORMAL');
+INSERT INTO operation_mode (id, description, mode_operation) VALUES (3, 'Modo hora pico', 'PEAK');
+
+-- ======================================
 -- RUTA PRINCIPAL - 2
 -- ======================================
 
@@ -81,10 +89,4 @@ INSERT INTO traffic_light (id, direction, intersection_id) VALUES (62, 'SN', 16)
 INSERT INTO traffic_light (id, direction, intersection_id) VALUES (63, 'EW', 16);
 INSERT INTO traffic_light (id, direction, intersection_id) VALUES (64, 'WE', 16);
 
--- ======================================
--- Modos de operacion
--- ======================================
 
-INSERT INTO operation_mode (id, description, mode_operation) VALUES (1, 'Modo apagado', 'OFF');
-INSERT INTO operation_mode (id, description, mode_operation) VALUES (2, 'Modo normal', 'NORMAL');
-INSERT INTO operation_mode (id, description, mode_operation) VALUES (3, 'Modo hora pico', 'PEAK');
