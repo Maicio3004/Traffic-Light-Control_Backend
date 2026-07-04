@@ -1,5 +1,6 @@
 package co.edu.uis.traffic.config;
 
+import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +24,7 @@ public class DatabaseConfig {
     private final JdbcTemplate jdbcTemplate;   // Inyectado automáticamente
 
     @Bean
-    CommandLineRunner runSql(DataSource dataSource) {
+    CommandLineRunner runSql(DataSource dataSource, EntityManagerFactory entityManagerFactory) {
         return args -> {
             try {
                 // Verificar si ya se ejecutó el import
@@ -35,6 +36,8 @@ public class DatabaseConfig {
                 }
 
                 logger.info("🚀 Ejecutando import.sql por primera vez...");
+
+                Thread.sleep(2000);
 
                 try (Connection connection = dataSource.getConnection()) {
                     ScriptUtils.executeSqlScript(
