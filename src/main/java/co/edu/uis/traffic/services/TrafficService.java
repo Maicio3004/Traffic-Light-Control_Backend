@@ -101,7 +101,7 @@ public class TrafficService {
             }
 
         }
-        logRouteSummary(route, isBeforeNoon);
+        logRouteSummary(route, isBeforeNoon, sort);
     }
 
     private Pair<String, String> calculateSegment(
@@ -136,22 +136,28 @@ public class TrafficService {
         return Pair.of(origin, finish);
     }
 
-    private void logRouteSummary(Route route, boolean isBeforeNoon) {
+    private void logRouteSummary(Route route, boolean isBeforeNoon, Sort sort) {
 
         String origin;
         String finish;
 
+        List<Intersection> intersections = intersectionRepository
+                .findByRoute(route, sort);
+
         if(isBeforeNoon) {
-            origin = route.getIntersections().getFirst().getCoordinate().toString();
+            origin = intersections.getFirst().getCoordinate().toString();
             finish = route.getInitCoordinate().toString();
         } else {
             origin = route.getInitCoordinate().toString();
-            finish =  route.getIntersections().getLast().getCoordinate().toString();
+            finish =  intersections.getLast().getCoordinate().toString();
         }
 
-        double congestion = googleAPIClient.verifyCongestion(origin, finish).getCongestion();
+        double congestion = googleAPIClient
+                .verifyCongestion(origin, finish).getCongestion();
 
         log.info("Congestion global en la 27: {}", congestion);
+        log.info("Origen de medición: {}", intersections.getFirst().getCode());
+        log.info("Destindo de medición: {}", intersections.getLast().getCode());
 
         //Enviamos la congestión global de la ruta 1.0
         sseService.sendEvent(

@@ -24,27 +24,30 @@ public class ScheduleService implements CrudService<Schedule> {
     private LocalDateTime lastExecution = null;
 
     //Se ejecuta cada minuto
-    //@Scheduled(fixedRate = 60000)
+    @Scheduled(fixedRate = 60000)
     public void scheduler() {
 
         Schedule schedule = getCurrentSchedule();
 
-        Mode mode = schedule.getMode().getModeOperation();
+        if(schedule != null) {
+            Mode mode = schedule.getMode().getModeOperation();
 
-        switch (mode) {
-            case OFF:
-                return;
+            switch (mode) {
+                case OFF:
+                    return;
 
-            case NORMAL:
-                executeIfDue(5);
-                break;
+                case NORMAL:
+                    executeIfDue(5);
+                    break;
 
-            case PEAK:
-                executeIfDue(3);
-                break;
+                case PEAK:
+                    executeIfDue(3);
+                    break;
+            }
+            //Enviamos el modo actual
+            sseService.sendEvent(CURRENT_MODE_EVENT, CurrentModeEvent.create(mode.name()));
         }
-        //Enviamos el modo actual
-        sseService.sendEvent(CURRENT_MODE_EVENT, CurrentModeEvent.create(mode.name()));
+
     }
 
     public void executeIfDue(int minutes) {

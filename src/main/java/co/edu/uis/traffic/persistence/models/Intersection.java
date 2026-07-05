@@ -33,7 +33,7 @@ public class Intersection {
     @Embedded
     private Coordinate coordinate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "route_id", nullable = false)
     private Route route;
 

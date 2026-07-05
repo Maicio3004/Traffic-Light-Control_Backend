@@ -29,7 +29,7 @@ public class Schedule {
     @Column(nullable = false, name = "end_time")
     private LocalTime endTime;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "mode_id")
     private OperationMode mode;
 

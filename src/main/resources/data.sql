@@ -1,5 +1,3 @@
-CREATE TABLE IF NOT EXISTS schema_version (id BIGINT AUTO_INCREMENT PRIMARY KEY, type VARCHAR(100) NOT NULL, version VARCHAR(50), description VARCHAR(255), executed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
-
 -- ======================================
 -- Modos de operacion
 -- ======================================
