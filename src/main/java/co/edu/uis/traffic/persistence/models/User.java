@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
-@Table(indexes = {
+@Table(name = "users", indexes = {
          @Index(name = "idx_email", columnList = "email", unique = true)
 })
 @Data
@@ -27,7 +27,7 @@ public class User {
     @Column(nullable = false, name = "last_name")
     private String lastName;
 
-    @Column(length = 400, name = "email")
+    @Column(length = 400)
     private String email;
 
     @Column(nullable = false, length = 355)

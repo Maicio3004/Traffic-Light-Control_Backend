@@ -1,6 +1,11 @@
+CREATE TABLE IF NOT EXISTS schema_version (id BIGINT AUTO_INCREMENT PRIMARY KEY, type VARCHAR(100) NOT NULL, version VARCHAR(50), description VARCHAR(255), executed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+
 -- ======================================
 -- Modos de operacion
 -- ======================================
+
+INSERT INTO users (id, email, name, last_name, password, phone, role) VALUES (1, 'admin@gmail.com', 'Cristian', 'Ramirez', 'admin123', '300154789', 'ADMIN');
+INSERT INTO users (id, email, name, last_name, password, phone, role) VALUES (2, 'operador@gmail.com', 'Andrea', 'Ardila', 'operador123', '3565621456', 'OPERATOR');
 
 INSERT INTO operation_mode (id, description, mode_operation) VALUES (1, 'Modo apagado', 'OFF');
 INSERT INTO operation_mode (id, description, mode_operation) VALUES (2, 'Modo normal', 'NORMAL');

@@ -24,7 +24,7 @@ public class ScheduleService implements CrudService<Schedule> {
     private LocalDateTime lastExecution = null;
 
     //Se ejecuta cada minuto
-    @Scheduled(fixedRate = 60000)
+    //@Scheduled(fixedRate = 60000)
     public void scheduler() {
 
         Schedule schedule = getCurrentSchedule();
