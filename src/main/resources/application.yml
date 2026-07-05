@@ -17,7 +17,6 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: update
-    show-sql: true
 
 mqtt:
   broker-url: ${MQTT_BROKER_URL}

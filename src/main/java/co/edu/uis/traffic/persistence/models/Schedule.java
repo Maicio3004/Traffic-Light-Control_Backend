@@ -33,4 +33,14 @@ public class Schedule {
     @JoinColumn(nullable = false, name = "mode_id")
     private OperationMode mode;
 
+    @Override
+    public String toString() {
+        return "Schedule{" +
+                "id=" + id +
+                ", daysOfWeek=" + daysOfWeek +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", mode=" + mode.getModeOperation().name() +
+                '}';
+    }
 }
