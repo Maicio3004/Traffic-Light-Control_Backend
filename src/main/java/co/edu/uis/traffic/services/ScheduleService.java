@@ -1,6 +1,7 @@
 package co.edu.uis.traffic.services;
 
 import co.edu.uis.traffic.dtos.response.events.CurrentModeEvent;
+import co.edu.uis.traffic.persistence.models.OperationMode;
 import co.edu.uis.traffic.persistence.models.Schedule;
 import co.edu.uis.traffic.persistence.models.enums.Mode;
 import co.edu.uis.traffic.persistence.repositories.ScheduleRepository;
@@ -36,9 +37,31 @@ public class ScheduleService implements CrudService<Schedule> {
 
         logger.info("Horario actual: {}", schedule);
 
+<<<<<<< HEAD
         if (schedule == null) {
             sseService.sendEvent(CURRENT_MODE_EVENT, CurrentModeEvent.create(Mode.OFF.name()));
             return;
+=======
+        if(schedule != null) {
+            Mode mode = schedule.getMode().getModeOperation();
+
+            switch (mode) {
+                case OFF:
+                    return;
+
+                case NORMAL:
+                    executeIfDue(5);
+                    break;
+
+                case PEAK:
+                    executeIfDue(3);
+                    break;
+            }
+            //Enviamos el modo actual
+            sseService.sendEvent(CURRENT_MODE_EVENT, CurrentModeEvent.create(mode.name()));
+        } else {
+            sseService.sendEvent(CURRENT_MODE_EVENT, CurrentModeEvent.create(Mode.OFF.name()));
+>>>>>>> 167ad44a2d2b3a604b9adb12b57b0eeaf4cace90
         }
 
         Mode mode = schedule.getMode().getModeOperation();
