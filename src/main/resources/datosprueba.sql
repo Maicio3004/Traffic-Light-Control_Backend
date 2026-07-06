@@ -4,8 +4,6 @@ CREATE TABLE IF NOT EXISTS schema_version (id BIGINT AUTO_INCREMENT PRIMARY KEY,
 -- Modos de operacion
 -- ======================================
 
-INSERT INTO users (id, email, name, last_name, password, phone, role) VALUES (1, 'admin@gmail.com', 'Cristian', 'Ramirez', 'admin123', '300154789', 'ADMIN');
-INSERT INTO users (id, email, name, last_name, password, phone, role) VALUES (2, 'operador@gmail.com', 'Andrea', 'Ardila', 'operador123', '3565621456', 'OPERATOR');
 
 INSERT INTO operation_mode (id, description, mode_operation) VALUES (1, 'Modo apagado', 'OFF');
 INSERT INTO operation_mode (id, description, mode_operation) VALUES (2, 'Modo normal', 'NORMAL');
@@ -92,4 +90,5 @@ INSERT INTO traffic_light (id, direction, intersection_id) VALUES (62, 'SN', 16)
 INSERT INTO traffic_light (id, direction, intersection_id) VALUES (63, 'EW', 16);
 INSERT INTO traffic_light (id, direction, intersection_id) VALUES (64, 'WE', 16);
 
-
+INSERT INTO users (id, email, name, last_name, password, phone, role) VALUES (1, 'admin@gmail.com', 'Cristian', 'Ramirez', 'admin123', '300154789', 'ADMIN');
+INSERT INTO users (id, email, name, last_name, password, phone, role) VALUES (2, 'operador@gmail.com', 'Andrea', 'Ardila', 'operador123', '3565621456', 'OPERATOR');

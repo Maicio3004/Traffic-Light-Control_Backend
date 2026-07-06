@@ -168,7 +168,11 @@ public class TrafficService {
 
     private void reduceCongestion(List<Intersection> intersections, int iterator) {
         for (int i = iterator; i < intersections.size(); i++) {
-            transactionService.create(intersections.get(i));
+            try {
+                transactionService.create(intersections.get(i));
+            } catch (Exception e) {
+                log.warn("No se pudo enviar comando MQTT a {}: {}", intersections.get(i).getCode(), e.getMessage());
+            }
         }
     }
 
