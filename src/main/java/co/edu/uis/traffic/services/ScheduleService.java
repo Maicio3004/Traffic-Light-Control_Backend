@@ -1,6 +1,7 @@
 package co.edu.uis.traffic.services;
 
 import co.edu.uis.traffic.dtos.response.events.CurrentModeEvent;
+import co.edu.uis.traffic.persistence.models.OperationMode;
 import co.edu.uis.traffic.persistence.models.Schedule;
 import co.edu.uis.traffic.persistence.models.enums.Mode;
 import co.edu.uis.traffic.persistence.repositories.ScheduleRepository;
@@ -53,6 +54,8 @@ public class ScheduleService implements CrudService<Schedule> {
             }
             //Enviamos el modo actual
             sseService.sendEvent(CURRENT_MODE_EVENT, CurrentModeEvent.create(mode.name()));
+        } else {
+            sseService.sendEvent(CURRENT_MODE_EVENT, CurrentModeEvent.create(Mode.OFF.name()));
         }
 
     }
