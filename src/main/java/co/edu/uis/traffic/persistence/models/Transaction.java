@@ -29,9 +29,8 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "return_date")
+    private LocalDateTime returnDate;
 
     @Column(nullable = false, name = "created_at")
     private LocalDateTime createdAt;

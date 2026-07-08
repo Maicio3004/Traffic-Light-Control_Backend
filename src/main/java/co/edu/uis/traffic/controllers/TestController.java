@@ -1,6 +1,6 @@
 package co.edu.uis.traffic.controllers;
 
-import co.edu.uis.traffic.dtos.request.ActivationRequest;
+import co.edu.uis.traffic.dtos.request.ColorRequest;
 import co.edu.uis.traffic.dtos.response.events.StatusIntersectionEvent;
 import co.edu.uis.traffic.services.ScheduleService;
 import co.edu.uis.traffic.services.TrafficService;
@@ -27,7 +27,7 @@ public class TestController {
     }
 
     @PostMapping("/test/color")
-    public ResponseEntity<String> testESP32(@RequestBody ActivationRequest request) {
+    public ResponseEntity<String> testESP32(@RequestBody ColorRequest request) {
         mqttPublisher.test(request);
         return ResponseEntity.ok("Mensaje enviado");
     }

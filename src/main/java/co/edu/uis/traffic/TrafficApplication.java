@@ -18,7 +18,7 @@ public class TrafficApplication {
         Set<String> keys = Set.of("DB_HOST", "DB_PORT", "DB_USERNAME", "DB_PASSWORD", "DB_DEFAULT",
                 "BACKEND_PORT", "MQTT_BROKER_URL", "MQTT_CLIENT_ID", "MQTT_USERNAME", "MQTT_PASSWORD",
                 "INBOUND_COLOR_TOPIC", "INBOUND_STATUS_TOPIC", "OUTBOUND_ACTIVATE_TOPIC", "ACTIVATE_TOPIC",
-                "GOOGLE_MAPS_BASE_URL", "GOOGLE_MAPS_API_KEY");
+                "GOOGLE_MAPS_BASE_URL", "GOOGLE_MAPS_API_KEY", "INBOUND_RETURN_DATE_TOPIC");
 
         envLoader.loadSelected(keys);
 

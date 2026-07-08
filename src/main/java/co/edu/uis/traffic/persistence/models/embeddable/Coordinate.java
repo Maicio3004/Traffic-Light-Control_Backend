@@ -2,9 +2,11 @@ package co.edu.uis.traffic.persistence.models.embeddable;
 
 import jakarta.persistence.Embeddable;
 import lombok.Getter;
+import lombok.Setter;
 
 @Embeddable
 @Getter
+@Setter
 public class Coordinate {
 
     private Float latitude;

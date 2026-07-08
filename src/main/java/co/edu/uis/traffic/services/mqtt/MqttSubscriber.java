@@ -1,6 +1,5 @@
 package co.edu.uis.traffic.services.mqtt;
 
-import co.edu.uis.traffic.dtos.request.ActivationRequest;
 import co.edu.uis.traffic.dtos.response.events.ColorTrafficEvent;
 import co.edu.uis.traffic.dtos.response.events.StatusIntersectionEvent;
 import co.edu.uis.traffic.services.SseService;
@@ -14,8 +13,6 @@ import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.mqtt.support.MqttHeaders;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Service;
-
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +28,9 @@ public class MqttSubscriber {
     @Value("${mqtt.topics.inbound-status-topic}")
     private String INBOUND_STATUS_TOPIC;
 
+    @Value("${mqtt.topics.inbound-return-date-topic}")
+    private String INBOUND_RETURN_DATE_TOPIC;
+
     private final ObjectMapper mapper;
     private final SseService sseService;
 
@@ -40,7 +40,6 @@ public class MqttSubscriber {
         String receivedTopic = (String) message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC);
 
         Object payload = message.getPayload();
-
 
         try {
             if(payload instanceof String json) {
@@ -54,6 +53,10 @@ public class MqttSubscriber {
 
                     StatusIntersectionEvent request = mapper.readValue(json, StatusIntersectionEvent.class);
                     sseService.sendEvent(INTERSECTION_STATUS, request);
+                } else if(receivedTopic.equals(INBOUND_RETURN_DATE_TOPIC)) {
+
+
+
                 }
 
             } else {

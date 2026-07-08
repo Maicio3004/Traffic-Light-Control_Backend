@@ -3,12 +3,15 @@ package co.edu.uis.traffic.dtos.response;
 import co.edu.uis.traffic.persistence.models.Transaction;
 
 public record ActivationResponse(
-    Boolean payload,
+    Payload payload,
     String endTopic
 ) {
     public static ActivationResponse fromTransaction(Transaction transaction) {
         return new ActivationResponse(
-            transaction.isValid(),
+            Payload.create(
+                    transaction.isValid(),
+                    transaction.getId()
+            ),
             transaction.getIntersection().getCode()
         );
     }

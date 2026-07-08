@@ -1,10 +1,16 @@
 package co.edu.uis.traffic.controllers;
 
+import co.edu.uis.traffic.dtos.request.IntersectionRequest;
 import co.edu.uis.traffic.dtos.request.OperationRequest;
+import co.edu.uis.traffic.dtos.request.RouteRequest;
 import co.edu.uis.traffic.dtos.request.ScheduleRequest;
+import co.edu.uis.traffic.dtos.response.IntersectionResponse;
+import co.edu.uis.traffic.dtos.response.RouteResponse;
 import co.edu.uis.traffic.dtos.response.ScheduleResponse;
 import co.edu.uis.traffic.persistence.models.OperationMode;
+import co.edu.uis.traffic.persistence.models.Route;
 import co.edu.uis.traffic.services.OperationService;
+import co.edu.uis.traffic.services.RouteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +24,7 @@ import java.util.List;
 public class OperationController {
 
     private final OperationService operationService;
+    private final RouteService routeService;
 
     @PostMapping("/create/mode")
     public ResponseEntity<Void> createMode(@RequestBody OperationRequest request) {
@@ -42,6 +49,20 @@ public class OperationController {
     public ResponseEntity<Void> deleteSchedule(@PathVariable Integer id) {
         operationService.deleteSchedule(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("create/route")
+    public ResponseEntity<RouteResponse> createRoute(@RequestBody RouteRequest request) {
+        return ResponseEntity.created(URI.create("/config/create/route"))
+                .body(RouteResponse.toResponse(routeService.create(request)));
+    }
+
+    @PostMapping("/create/intersection")
+    public ResponseEntity<List<IntersectionResponse>> createIntersections(
+            @RequestBody List<IntersectionRequest> intersectionRequests
+    ){
+        return ResponseEntity.created(URI.create("/config/create/intersections"))
+                .body(routeService.saveIntersections(intersectionRequests));
     }
 
 }

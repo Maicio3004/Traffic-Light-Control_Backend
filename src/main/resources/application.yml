@@ -26,6 +26,7 @@ mqtt:
   topics:
     inbound-color-topic: ${INBOUND_COLOR_TOPIC}
     inbound-status-topic: ${INBOUND_STATUS_TOPIC}
+    inbound-return-date-topic: ${INBOUND_RETURN_DATE_TOPIC}
     outbound-activate-topic: ${OUTBOUND_ACTIVATE_TOPIC}
 
 google:

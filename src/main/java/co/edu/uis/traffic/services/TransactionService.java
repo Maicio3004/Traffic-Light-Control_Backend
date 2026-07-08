@@ -20,9 +20,9 @@ public class TransactionService implements CrudService<Transaction> {
     private final MqttPublish publisher;
 
     public void create(Intersection intersection) {
-        Transaction transaction = TransactionMapper.toEntity(intersection);
-        repository.save(transaction);
-        activateTraffic(transaction);
+        Transaction savedTransaction = repository
+                .save(TransactionMapper.toEntity(intersection));
+        activateTraffic(savedTransaction);
     }
 
     public void activateTraffic(Transaction transaction) {

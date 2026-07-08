@@ -40,7 +40,4 @@ public class Intersection {
     @OneToMany(mappedBy = "intersection")
     private List<Transaction> transactions;
 
-    @OneToMany(mappedBy = "intersection")
-    private List<TrafficLight> trafficLights;
-
 }

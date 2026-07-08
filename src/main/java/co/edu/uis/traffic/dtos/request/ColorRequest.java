@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class ActivationRequest {
+public class ColorRequest {
 
     private String color;
 

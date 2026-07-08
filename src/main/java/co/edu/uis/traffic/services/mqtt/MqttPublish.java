@@ -1,6 +1,6 @@
 package co.edu.uis.traffic.services.mqtt;
 
-import co.edu.uis.traffic.dtos.request.ActivationRequest;
+import co.edu.uis.traffic.dtos.request.ColorRequest;
 import co.edu.uis.traffic.dtos.response.ActivationResponse;
 import co.edu.uis.traffic.dtos.response.events.StatusIntersectionEvent;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -39,7 +39,7 @@ public class MqttPublish {
 
     }
 
-    public void test(ActivationRequest request) {
+    public void test(ColorRequest request) {
 
         String json = writeValueAsString(request);
         String topic = "intersection/status";
