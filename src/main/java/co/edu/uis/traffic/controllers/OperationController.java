@@ -64,5 +64,29 @@ public class OperationController {
         return ResponseEntity.created(URI.create("/config/create/intersections"))
                 .body(routeService.saveIntersections(intersectionRequests));
     }
+    @GetMapping("/routes")
+    public ResponseEntity<List<RouteResponse>> getRoutes() {
+        return ResponseEntity.ok(routeService.findAll().stream()
+                .map(RouteResponse::toResponse)
+                .toList());
+    }
 
+    @GetMapping("/routes/{id}/intersections")
+    public ResponseEntity<List<IntersectionResponse>> getIntersectionsByRoute(@PathVariable Integer id) {
+        return ResponseEntity.ok(routeService.findById(id).getIntersections().stream()
+                .map(IntersectionResponse::fromEntity)
+                .toList());
+    }
+
+    @DeleteMapping("/routes/{id}")
+    public ResponseEntity<Void> deleteRoute(@PathVariable Integer id) {
+        routeService.deleteRoute(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/intersections/{code}")
+    public ResponseEntity<Void> deleteIntersection(@PathVariable String code) {
+        routeService.deleteIntersection(code);
+        return ResponseEntity.ok().build();
+    }
 }

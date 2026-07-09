@@ -12,6 +12,7 @@ import co.edu.uis.traffic.persistence.repositories.RouteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,5 +66,15 @@ public class RouteService implements CrudService<Route> {
     public Route findById(Number id) {
         return routeRepository.findById(id.intValue())
                 .orElseThrow(() -> new EntityNotFound("Route with id " + id + " not found"));
+    }
+
+    public void deleteRoute(Integer id) {
+        routeRepository.deleteById(id);
+    }
+
+    public void deleteIntersection(String code) {
+        Intersection intersection = intersectionRepository.findByCode(code)
+                .orElseThrow(() -> new EntityNotFound("Intersection not found: " + code));
+        intersectionRepository.delete(intersection);
     }
 }
