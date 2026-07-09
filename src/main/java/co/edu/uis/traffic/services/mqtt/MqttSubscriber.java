@@ -1,8 +1,10 @@
 package co.edu.uis.traffic.services.mqtt;
 
+import co.edu.uis.traffic.dtos.request.ReturnDateRequest;
 import co.edu.uis.traffic.dtos.response.events.ColorTrafficEvent;
 import co.edu.uis.traffic.dtos.response.events.StatusIntersectionEvent;
 import co.edu.uis.traffic.services.SseService;
+import co.edu.uis.traffic.services.TransactionService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +35,7 @@ public class MqttSubscriber {
 
     private final ObjectMapper mapper;
     private final SseService sseService;
+    private final TransactionService transactionService;
 
     @ServiceActivator(inputChannel = "inboundChannel")
     public void subscribe(Message<?> message) {
@@ -55,8 +58,9 @@ public class MqttSubscriber {
                     sseService.sendEvent(INTERSECTION_STATUS, request);
                 } else if(receivedTopic.equals(INBOUND_RETURN_DATE_TOPIC)) {
 
-
-
+                    ReturnDateRequest request = mapper.readValue(json, ReturnDateRequest.class);
+                    log.info("Received return-date request: {}", request);
+                    transactionService.update(request);
                 }
 
             } else {

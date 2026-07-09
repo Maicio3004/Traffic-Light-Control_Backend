@@ -1,6 +1,8 @@
 package co.edu.uis.traffic.services;
 
+import co.edu.uis.traffic.dtos.request.ReturnDateRequest;
 import co.edu.uis.traffic.dtos.response.ActivationResponse;
+import co.edu.uis.traffic.dtos.response.TransactionResponse;
 import co.edu.uis.traffic.exceptions.EntityNotFound;
 import co.edu.uis.traffic.mappers.TransactionMapper;
 import co.edu.uis.traffic.persistence.models.Intersection;
@@ -20,13 +22,23 @@ public class TransactionService implements CrudService<Transaction> {
     private final MqttPublish publisher;
 
     public void create(Intersection intersection) {
-        Transaction savedTransaction = repository
-                .save(TransactionMapper.toEntity(intersection));
+        Transaction savedTransaction = create(TransactionMapper.toEntity(intersection));
         activateTraffic(savedTransaction);
     }
 
     public void activateTraffic(Transaction transaction) {
         publisher.activateIntersection(ActivationResponse.fromTransaction(transaction));
+    }
+
+    public List<TransactionResponse> getAll() {
+        return findAll().stream()
+                .map(TransactionResponse::toResponse).toList();
+    }
+
+    public Transaction update(ReturnDateRequest returnDate) {
+        Transaction transaction = findById(returnDate.getIdTransaction());
+        transaction.setReturnDate(returnDate.getReturnDate());
+        return create(transaction);
     }
 
     @Override

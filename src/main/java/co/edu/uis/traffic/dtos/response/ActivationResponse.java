@@ -15,4 +15,12 @@ public record ActivationResponse(
             transaction.getIntersection().getCode()
         );
     }
+
+    @Override
+    public String toString() {
+        return "ActivationResponse{" +
+                "payload=" + payload +
+                ", endTopic='" + endTopic + '\'' +
+                '}';
+    }
 }
