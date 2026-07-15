@@ -70,9 +70,6 @@ public class MqttSubscriber {
             log.error(e.getMessage());
         }
 
-
-
-
     }
 
 }

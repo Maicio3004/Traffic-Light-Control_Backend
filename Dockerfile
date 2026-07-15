@@ -26,6 +26,7 @@ ENV MQTT_PASSWORD=""
 ENV INBOUND_COLOR_TOPIC=intersection/color
 ENV INBOUND_STATUS_TOPIC=intersection/status
 ENV OUTBOUND_ACTIVATE_TOPIC=intersection/activate/
+ENV INBOUND_RETURN_DATE_TOPIC=intersection/return_date
 
 #Google Maps API
 ENV GOOGLE_MAPS_API_KEY=""
