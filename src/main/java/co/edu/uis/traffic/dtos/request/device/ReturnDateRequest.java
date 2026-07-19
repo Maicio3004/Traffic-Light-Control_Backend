@@ -1,4 +1,4 @@
-package co.edu.uis.traffic.dtos.request;
+package co.edu.uis.traffic.dtos.request.device;
 
 import lombok.Getter;
 

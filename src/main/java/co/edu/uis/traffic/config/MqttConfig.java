@@ -34,6 +34,9 @@ public class MqttConfig {
     @Value("${mqtt.topics.inbound-status-topic}")
     private String inboundStatusTopic;
 
+    @Value("${mqtt.topics.inbound-status-device-topic}")
+    private String inboundStatusDeviceTopic;
+
     /**
      * Creamos el Factory para crear canales de entrada y salida
      */
@@ -56,12 +59,17 @@ public class MqttConfig {
      * para poder enviar mensajes al front sin salir del hilo de ejecución
      */
     @Bean
-    public MqttPahoMessageDrivenChannelAdapter inboundAdapter(MqttPahoClientFactory factory, MessageChannel inboundChannel) {
+    public MqttPahoMessageDrivenChannelAdapter inboundAdapter(
+            MqttPahoClientFactory factory,
+            MessageChannel inboundChannel
+    ) {
         MqttPahoMessageDrivenChannelAdapter adapter =
                 new MqttPahoMessageDrivenChannelAdapter(
                         clientId + "_in",
                         factory,
-                        inboundColorTopic, inboundStatusTopic
+                        inboundColorTopic,
+                        inboundStatusTopic,
+                        inboundStatusDeviceTopic
                 );
 
         adapter.setOutputChannel(inboundChannel);

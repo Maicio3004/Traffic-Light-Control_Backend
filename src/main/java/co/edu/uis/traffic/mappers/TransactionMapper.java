@@ -13,8 +13,8 @@ public class TransactionMapper {
         Transaction transaction = new Transaction();
         transaction.setIntersection(intersection);
         transaction.setCreatedAt(LocalDateTime.now());
-        transaction.setStatus(TransactionStatus.COMPLETED);
-        transaction.setDescription("Transaction created successfully");
+        transaction.setStatus(TransactionStatus.IN_PROGRESS);
+        transaction.setDescription("Transacción en progreso");
 
         return transaction;
     }

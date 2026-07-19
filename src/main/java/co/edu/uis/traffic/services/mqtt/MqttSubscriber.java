@@ -1,6 +1,7 @@
 package co.edu.uis.traffic.services.mqtt;
 
-import co.edu.uis.traffic.dtos.request.ReturnDateRequest;
+import co.edu.uis.traffic.dtos.request.device.ReturnDateRequest;
+import co.edu.uis.traffic.dtos.request.device.StatusRequest;
 import co.edu.uis.traffic.dtos.response.events.ColorTrafficEvent;
 import co.edu.uis.traffic.dtos.response.events.StatusIntersectionEvent;
 import co.edu.uis.traffic.services.SseService;
@@ -30,8 +31,7 @@ public class MqttSubscriber {
     @Value("${mqtt.topics.inbound-status-topic}")
     private String INBOUND_STATUS_TOPIC;
 
-    @Value("${mqtt.topics.inbound-return-date-topic}")
-    private String INBOUND_RETURN_DATE_TOPIC;
+    private final String INBOUND_STATUS_DEVICE_TOPIC = "response/status/";
 
     private final ObjectMapper mapper;
     private final SseService sseService;
@@ -56,11 +56,14 @@ public class MqttSubscriber {
 
                     StatusIntersectionEvent request = mapper.readValue(json, StatusIntersectionEvent.class);
                     sseService.sendEvent(INTERSECTION_STATUS, request);
-                } else if(receivedTopic.equals(INBOUND_RETURN_DATE_TOPIC)) {
 
-                    ReturnDateRequest request = mapper.readValue(json, ReturnDateRequest.class);
-                    log.info("Received return-date request: {}", request);
+                } else if (receivedTopic.contains(INBOUND_STATUS_DEVICE_TOPIC)) {
+
+                    StatusRequest request = mapper.readValue(json, StatusRequest.class);
                     transactionService.update(request);
+
+                    log.info("Status transaction received: {}", request);
+
                 }
 
             } else {

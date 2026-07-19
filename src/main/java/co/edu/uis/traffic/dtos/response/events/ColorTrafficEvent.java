@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class ColorTrafficEvent {
-    private String color;
+    private String colorCarrera;
+    private String colorCalle;
     private String codeIntersection;
 }

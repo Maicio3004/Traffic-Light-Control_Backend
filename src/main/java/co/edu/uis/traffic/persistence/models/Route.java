@@ -1,6 +1,7 @@
 package co.edu.uis.traffic.persistence.models;
 
 import co.edu.uis.traffic.persistence.models.embeddable.Coordinate;
+import co.edu.uis.traffic.persistence.models.enums.Location;
 import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -25,6 +26,9 @@ public class Route {
     @Embedded
     @Column(nullable=false, name = "init_coordinates")
     private Coordinate initCoordinate;
+
+    @Enumerated(EnumType.STRING)
+    private Location location;
 
     @OneToMany(mappedBy = "route")
     private List<Intersection> intersections;

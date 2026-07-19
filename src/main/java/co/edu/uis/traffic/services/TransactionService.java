@@ -1,12 +1,14 @@
 package co.edu.uis.traffic.services;
 
-import co.edu.uis.traffic.dtos.request.ReturnDateRequest;
+import co.edu.uis.traffic.dtos.request.device.DeviceStatus;
+import co.edu.uis.traffic.dtos.request.device.StatusRequest;
 import co.edu.uis.traffic.dtos.response.ActivationResponse;
 import co.edu.uis.traffic.dtos.response.TransactionResponse;
 import co.edu.uis.traffic.exceptions.EntityNotFound;
 import co.edu.uis.traffic.mappers.TransactionMapper;
 import co.edu.uis.traffic.persistence.models.Intersection;
 import co.edu.uis.traffic.persistence.models.Transaction;
+import co.edu.uis.traffic.persistence.models.enums.TransactionStatus;
 import co.edu.uis.traffic.persistence.repositories.TransactionRepository;
 import co.edu.uis.traffic.services.mqtt.MqttPublish;
 import lombok.RequiredArgsConstructor;
@@ -35,10 +37,25 @@ public class TransactionService implements CrudService<Transaction> {
                 .map(TransactionResponse::toResponse).toList();
     }
 
-    public Transaction update(ReturnDateRequest returnDate) {
-        Transaction transaction = findById(returnDate.getIdTransaction());
-        transaction.setReturnDate(returnDate.getReturnDate());
-        return create(transaction);
+    public void update(StatusRequest request) {
+
+        if(request.getStatus().equals(DeviceStatus.ACCEPTED)) {
+            return;
+        }
+
+        Transaction transaction = findById(request.getIdTransaction());
+
+        if(request.getStatus().equals(DeviceStatus.BLOCKED)) {
+            transaction.setStatus(TransactionStatus.CANCELED);
+            transaction.setDescription("Transacción rechazada por bloqueo de semaforo");
+            transaction.setReturnDate(transaction.getCreatedAt());
+        } else if (request.getStatus().equals(DeviceStatus.AVAILABLE)) {
+            transaction.setStatus(TransactionStatus.COMPLETED);
+            transaction.setDescription("Transacción finalizada");
+            transaction.setReturnDate(request.getTimestamp());
+        }
+
+        create(transaction);
     }
 
     @Override

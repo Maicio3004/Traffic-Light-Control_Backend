@@ -13,7 +13,7 @@ INSERT INTO operation_mode (id, description, mode_operation) VALUES (3, 'Modo ho
 -- ======================================
 
 -- Insertar la ruta
-INSERT INTO route (id, name, latitude, longitude) VALUES (1, 'Ruta - Carrera 27', '7.125947', '-73.118499');
+INSERT INTO route (id, name, latitude, longitude, location) VALUES (1, 'Carrera 27', '7.125947', '-73.118499', 'CARRERA');
 
 -- ======================================
 -- INTERSECCIONES

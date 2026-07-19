@@ -8,10 +8,7 @@ public record ActivationResponse(
 ) {
     public static ActivationResponse fromTransaction(Transaction transaction) {
         return new ActivationResponse(
-            Payload.create(
-                    transaction.isValid(),
-                    transaction.getId()
-            ),
+            Payload.create(transaction),
             transaction.getIntersection().getCode()
         );
     }
