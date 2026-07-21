@@ -8,13 +8,15 @@ import java.util.List;
 public record RouteResponse(
         Integer id,
         String name,
-        Coordinate coordinate
+        Coordinate coordinate,
+        String location
 ) {
     public static RouteResponse toResponse(Route route) {
         return new RouteResponse(
                 route.getId(),
                 route.getName(),
-                route.getInitCoordinate()
+                route.getInitCoordinate(),
+                route.getLocation().name()
         );
     }
 }

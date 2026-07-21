@@ -53,6 +53,9 @@ public class TransactionService implements CrudService<Transaction> {
             transaction.setStatus(TransactionStatus.COMPLETED);
             transaction.setDescription("Transacción finalizada");
             transaction.setReturnDate(request.getTimestamp());
+        } else if (request.getStatus().equals(DeviceStatus.ACCEPTED)) {
+            transaction.setStatus(TransactionStatus.ACCEPTED);
+            transaction.setDescription("Semaforo en verde");
         }
 
         create(transaction);

@@ -9,7 +9,8 @@ public record TransactionResponse(
     LocalDateTime createdAt,
     LocalDateTime returnDate,
     String codeIntersection,
-    String description
+    String description,
+    String statusTransaction
 ) {
     public static TransactionResponse toResponse(Transaction transaction) {
         return new TransactionResponse(
@@ -17,7 +18,8 @@ public record TransactionResponse(
                 transaction.getCreatedAt(),
                 transaction.getReturnDate(),
                 transaction.getIntersection().getCode(),
-                transaction.getDescription()
+                transaction.getDescription(),
+                transaction.getStatus().name()
         );
     }
 }

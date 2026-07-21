@@ -28,6 +28,7 @@ public class RouteService implements CrudService<Route> {
         Route route = new Route();
         route.setName(routeRequest.getName());
         route.setInitCoordinate(routeRequest.getCoordinate());
+        route.setLocation(routeRequest.getLocation());
 
         return create(route);
     }
