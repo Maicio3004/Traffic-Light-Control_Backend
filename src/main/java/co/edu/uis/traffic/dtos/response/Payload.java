@@ -20,6 +20,7 @@ public record Payload(
         return "Payload{" +
                 "payload=" + payload +
                 ", idTransaction=" + idTransaction +
+                ", location='" + location + '\'' +
                 '}';
     }
 }

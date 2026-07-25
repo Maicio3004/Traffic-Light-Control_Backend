@@ -11,7 +11,6 @@ public class IntersectionMapper {
         Intersection intersection = new Intersection();
         intersection.setCode(request.getCode());
         intersection.setCoordinate(request.getCoordinate());
-        intersection.setPosition(request.getPosition());
         intersection.setRoute(route);
         intersection.setLocation(request.getLocation());
 

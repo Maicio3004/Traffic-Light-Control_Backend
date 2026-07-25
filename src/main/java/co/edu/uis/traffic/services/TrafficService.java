@@ -66,8 +66,8 @@ public class TrafficService {
     private void processRoute(Route route, boolean isBeforeNoon) {
 
         Sort sort = isBeforeNoon
-                ? Sort.by(Sort.Direction.ASC, "position")
-                : Sort.by(Sort.Direction.DESC, "position");
+                ? Sort.by(Sort.Direction.DESC, "code")
+                : Sort.by(Sort.Direction.ASC, "code");
 
         List<Intersection> intersections =
                 intersectionRepository.findByRoute(route, sort);
@@ -155,7 +155,7 @@ public class TrafficService {
         double congestion = googleAPIClient
                 .verifyCongestion(origin, finish).getCongestion();
 
-        log.info("Congestion global en la 27: {}", congestion);
+        log.info("Congestion global en la {}: {}", route.getName(), congestion);
         log.info("Origen de medición: {}", intersections.getFirst().getCode());
         log.info("Destindo de medición: {}", intersections.getLast().getCode());
 

@@ -8,7 +8,6 @@ public class IntersectionRequest {
 
     private String location;
     private String code;
-    private Integer position;
     private Coordinate coordinate;
     private Integer routeId;
 
