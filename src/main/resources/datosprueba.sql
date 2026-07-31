@@ -50,6 +50,8 @@ INSERT INTO intersection (id, location, code, latitude, longitude, route_id) VAL
 -- Carrera 22
 INSERT INTO intersection (id, location, code, latitude, longitude, route_id) VALUES (13, 'Carrera 22', 'INT-22-36', '7.119901', '-73.120703', 2);
 
+INSERT INTO intersection (id, location, code, latitude, longitude, route_id) VALUES (14, 'Carrera 27', 'INT-27-36', '7.121387', '-73.116578', 2);
+
 
 INSERT INTO users (id, email, name, last_name, password, phone, role) VALUES (1, 'admin@gmail.com', 'Cristian', 'Ramirez', 'admin123', '300154789', 'ADMIN');
 INSERT INTO users (id, email, name, last_name, password, phone, role) VALUES (2, 'operador@gmail.com', 'Andrea', 'Ardila', 'operador123', '3565621456', 'OPERATOR');
