@@ -18,6 +18,10 @@ spring:
     hibernate:
       ddl-auto: update
 
+config:
+  cors:
+    allowed-origins: ${ALLOWED_ORIGINS}
+
 mqtt:
   broker-url: ${MQTT_BROKER_URL}
   client-id: ${MQTT_CLIENT_ID}

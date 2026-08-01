@@ -9,9 +9,11 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
+/*
 @Table(indexes = {
         @Index(name = "idx_code", columnList = "code", unique = true)
 })
+*/
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

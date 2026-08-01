@@ -32,6 +32,9 @@ ENV INBOUND_STATUS_DEVICE_TOPIC=response/status/#
 ENV GOOGLE_MAPS_API_KEY=""
 ENV GOOGLE_MAPS_BASE_URL=""
 
+#CORS allowed origins
+ENV ALLOWED_ORIGINS=""
+
 # ================================================================
 
 #COPIAR Y PEGAR ARCHIVOS DENTRO DEL CONTENEDOR

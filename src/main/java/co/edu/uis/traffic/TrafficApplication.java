@@ -19,7 +19,7 @@ public class TrafficApplication {
                 "BACKEND_PORT", "MQTT_BROKER_URL", "MQTT_CLIENT_ID", "MQTT_USERNAME", "MQTT_PASSWORD",
                 "INBOUND_COLOR_TOPIC", "INBOUND_STATUS_TOPIC", "OUTBOUND_ACTIVATE_TOPIC",
                 "ACTIVATE_TOPIC", "GOOGLE_MAPS_BASE_URL", "GOOGLE_MAPS_API_KEY",
-                "INBOUND_STATUS_DEVICE_TOPIC");
+                "INBOUND_STATUS_DEVICE_TOPIC", "ALLOWED_ORIGINS");
 
         envLoader.loadSelected(keys);
 
