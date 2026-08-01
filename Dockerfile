@@ -49,4 +49,4 @@ COPY ./src /root/src
 RUN ./mvnw clean install -DskipTests
 
 #LEVANTAR NUESTRA APLICACION CUANDO EL CONTENEDOR INICIE
-ENTRYPOINT ["java", "-jar", "/root/target/traffic-light-uis-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-Duser.timezone=America/Bogota", "-jar", "/root/target/traffic-light-uis-0.0.1-SNAPSHOT.jar"]
